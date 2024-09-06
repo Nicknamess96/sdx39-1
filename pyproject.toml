@@ -15,7 +15,8 @@ dependencies = [
     "edge-maxxing-pipelines @ git+ssh://git@github.com/womboai/edge-maxxing@docker-submissions#subdirectory=pipelines",
     "Pillow>=9.0.0",
     "huggingface-hub>=0.14.1",
-    "deepcache"
+    "deepcache",
+    "antlr4-python3-runtime==4.9.3"
 ]
 
 [project.scripts]
