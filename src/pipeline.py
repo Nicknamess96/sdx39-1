@@ -5,9 +5,7 @@ from pipelines.models import TextToImageRequest
 from torch import Generator
 import os
 from huggingface_hub import hf_hub_download
-import xformers
-import triton
-from sfast.compilers.diffusion_pipeline_compiler import (compile, CompilationConfig)
+from DeepCache import DeepCacheSDHelper
 
 def load_pipeline() -> StableDiffusionXLPipeline:
     model_id = "AIArchitect23/edge_1"
@@ -62,13 +60,9 @@ def load_pipeline() -> StableDiffusionXLPipeline:
         vae=vae
     )
 
-    config = CompilationConfig.Default()
-
-    config.enable_xformers = True
-    config.enable_triton = True
-    config.enable_cuda_graph = True
-
-    pipeline = compile(pipeline, config)
+    helper = DeepCacheSDHelper(pipe=pipe)
+    helper.set_params(cache_interval=3, cache_branch_id=0)
+    helper.enable()
 
     pipeline = pipeline.to("cuda")
     pipeline(prompt="")  # Warm-up run
