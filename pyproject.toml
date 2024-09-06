@@ -8,6 +8,10 @@ description = "An edge-maxxing model submission for the 4090 newdream contest"
 requires-python = ">=3.10,<3.11"
 version = "1.0.0"
 dependencies = [
+    "triton",
+    "xformers",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
     "diffusers==0.30.2",
     "transformers==4.41.2",
     "accelerate==0.31.0",
@@ -15,11 +19,7 @@ dependencies = [
     "edge-maxxing-pipelines @ git+ssh://git@github.com/womboai/edge-maxxing@docker-submissions#subdirectory=pipelines",
     "Pillow>=9.0.0",
     "huggingface-hub>=0.14.1",
-    "stable-fast",
-    "triton",
-    "xformers",
-    "torch>=2.0.0",
-    "torchvision>=0.15.0",
+    "stable-fast"
 ]
 
 [project.scripts]
