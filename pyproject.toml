@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "edge-maxxing-4090-newdream"
+description = "An edge-maxxing model submission for the 4090 newdream contest"
+requires-python = ">=3.10,<3.11"
+version = "1.0.0"
+dependencies = [
+    "diffusers==0.30.2",
+    "transformers==4.41.2",
+    "accelerate==0.31.0",
+    "omegaconf==2.3.0",
+    "edge-maxxing-pipelines @ git+ssh://git@github.com/womboai/edge-maxxing@docker-submissions#subdirectory=pipelines",
+    "Pillow>=9.0.0",
+    "huggingface-hub>=0.14.1",
+    "stable-fast",
+    "triton",
+    "xformers",
+]
+
+[project.scripts]
+start_inference = "src.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+namespaces = false
+
+[project.optional-dependencies]
+cuda = [
+    "torch>=2.0.0+cu121",
+    "torchvision>=0.15.0+cu121",
+]
+
+[tool.pip]
+extra-index-url = ["https://download.pytorch.org/whl/cu121"]
